@@ -1,0 +1,6957 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+
+  <title>05-01 十分钟上手 Pandas</title>
+  <meta name="description" content="十分钟上手 Pandaspandas 是一个 Python Data Analysis Library。安装请参考官网的教程，如果安装了 Anaconda，则不需要安装 pandas 库。      %matplotlib inlineimport pandas as pdimport numpy as npim...">
+
+  <link rel="canonical" href="http://0.0.0.0:4000//05/01.html">
+  <link rel="alternate" type="application/rss+xml" title="Python 教程" href="http://0.0.0.0:4000//feed.xml">
+
+  <meta property="og:url"         content="http://0.0.0.0:4000//05/01.html" />
+<meta property="og:type"        content="article" />
+<meta property="og:title"       content="05-01 十分钟上手 Pandas" />
+<meta property="og:description" content="十分钟上手 Pandaspandas 是一个 Python Data Analysis Library。安装请参考官网的教程，如果安装了 Anaconda，则不需要安装 pandas 库。      %matplotlib inlineimport pandas as pdimport numpy as npim..." />
+<meta property="og:image"       content="" />
+
+
+  <script type="application/ld+json">
+  {
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "mainEntityOfPage":
+    "http://0.0.0.0:4000//05/01.html",
+  "headline":
+    "05-01 十分钟上手 Pandas",
+  "datePublished":
+    "2019-08-08T11:31:33-05:00",
+  "dateModified":
+    "2019-08-08T11:31:33-05:00",
+  "description":
+    "十分钟上手 Pandaspandas 是一个 Python Data Analysis Library。安装请参考官网的教程，如果安装了 Anaconda，则不需要安装 pandas 库。      %matplotlib inlineimport pandas as pdimport numpy as npim...",
+  "author": {
+    "@type": "Person",
+    "name": "Momodel Team"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Data 100 at UC Berkeley",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://0.0.0.0:4000/",
+      "width": 60,
+      "height": 60
+    }
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "http://0.0.0.0:4000/",
+    "height": 60,
+    "width": 60
+  }
+}
+
+  </script>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css ">
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+  <!-- <link rel="manifest" href="/manifest.json"> -->
+  <!-- <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#efae0a"> -->
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <meta name="theme-color" content="#233947">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="/images/logo/Python.png">
+
+  <!-- MathJax Config -->
+  <!-- Allow inline math using $ and automatically break long math lines -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+        processEnvironments: true
+    },
+    CommonHTML: {
+        linebreaks: {
+            automatic: true,
+        },
+    },
+});
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_CHTML' async></script>
+
+  <!-- DOM updating function -->
+  <script>
+const runWhenDOMLoaded = cb => {
+  if (document.readyState != 'loading') {
+    cb()
+  } else if (document.addEventListener) {
+    document.addEventListener('DOMContentLoaded', cb)
+  } else {
+    document.attachEvent('onreadystatechange', function() {
+      if (document.readyState == 'complete') cb()
+    })
+  }
+}
+
+// Helper function to init things quickly
+initFunction = function(myfunc) {
+  runWhenDOMLoaded(myfunc);
+  document.addEventListener('turbolinks:load', myfunc);
+};
+</script>
+
+  <!-- Define some javascript variables that will be useful in other javascript -->
+  <script>
+    const site_basename = '/';
+  </script>
+
+  <!-- Add AnchorJS to let headers be linked -->
+  <script src="/assets/js/anchor.min.js"  type="text/javascript"></script>
+  <script>
+
+initFunction(function () {
+    anchors.add("main h1, main h2, main h3, main h4")
+});
+
+</script>
+
+  <!-- Include Turbolinks to make page loads fast -->
+  <!-- https://github.com/turbolinks/turbolinks -->
+  <script src="/assets/js/turbolinks.js" async></script>
+  <meta name="turbolinks-cache-control" content="no-cache">
+
+  <!-- Load nbinteract for widgets -->
+  
+
+  <!-- Load Thebelab for interactive widgets -->
+  <!-- Include Thebelab for interactive code if it's enabled -->
+
+
+<!-- Display Thebelab button in each code cell -->
+<script>
+/**
+ * Set up thebelab button for code blocks
+ */
+
+const thebelabCellButton = id =>
+  `<a id="thebelab-cell-button-${id}" class="btn thebebtn o-tooltip--left" data-tooltip="Interactive Mode">
+    <img src="/assets/images/edit-button.svg" alt="Start interactive mode">
+  </a>`
+
+
+const addThebelabButtonToCodeCells =  () => {
+
+  const codeCells = document.querySelectorAll('div.input_area > div.highlighter-rouge:not(.output) pre')
+  codeCells.forEach((codeCell, index) => {
+    const id = codeCellId(index)
+    codeCell.setAttribute('id', id)
+    if (document.getElementById("thebelab-cell-button-" + id) == null) {
+      codeCell.insertAdjacentHTML('afterend', thebelabCellButton(id));
+    }
+  })
+}
+
+initFunction(addThebelabButtonToCodeCells);
+</script>
+
+
+
+<script type="text/x-thebe-config">
+    {
+      requestKernel: true,
+      binderOptions: {
+        repo: 'momodel/Pythonbook',
+        ref: 'master',
+      },
+      codeMirrorConfig: {
+        theme: "abcdef"
+      },
+      kernelOptions: {
+        name: 'python2',
+      }
+    }
+</script>
+<script src="https://unpkg.com/thebelab@0.4.0/lib/index.js"></script>
+<script>
+    /**
+     * Add attributes to Thebelab blocks
+     */
+
+    const initThebelab = () => {
+        const addThebelabToCodeCells = () => {
+            console.log("Adding thebelab to code cells...");
+            // If Thebelab hasn't loaded, wait a bit and try again. This
+            // happens because we load ClipboardJS asynchronously.
+            if (window.thebelab === undefined) {
+                setTimeout(addThebelabToCodeCells, 250)
+            return
+            }
+
+            // If we already detect a Thebelab cell, don't re-run
+            if (document.querySelectorAll('div.thebelab-cell').length > 0) {
+                return;
+            }
+
+            // Find all code cells, replace with Thebelab interactive code cells
+            const codeCells = document.querySelectorAll('.input_area pre')
+            codeCells.forEach((codeCell, index) => {
+                const id = codeCellId(index)
+                codeCell.setAttribute('data-executable', 'true')
+
+                // Figure out the language it uses and add this too
+                var parentDiv = codeCell.parentElement.parentElement;
+                var arrayLength = parentDiv.classList.length;
+                for (var ii = 0; ii < arrayLength; ii++) {
+                    var parts = parentDiv.classList[ii].split('language-');
+                    if (parts.length === 2) {
+                        // If found, assign dataLanguage and break the loop
+                        var dataLanguage = parts[1];
+                        break;
+                    }
+                }
+                codeCell.setAttribute('data-language', dataLanguage)
+
+                // If the code cell is hidden, show it
+                var inputCheckbox = document.querySelector(`input#hidebtn${codeCell.id}`);
+                if (inputCheckbox !== null) {
+                    setCodeCellVisibility(inputCheckbox, 'visible');
+                }
+            });
+
+            // Remove the event listener from the page so keyboard press doesn't
+            // Change page
+            document.removeEventListener('keydown', initPageNav)
+            keyboardListener = false;
+
+            // Init thebelab
+            thebelab.bootstrap();
+
+            // Remove copy buttons since they won't work anymore
+            const copyAndThebeButtons = document.querySelectorAll('.copybtn, .thebebtn')
+            copyAndThebeButtons.forEach((button, index) => {
+                button.remove();
+            });
+
+            // Remove outputs since they'll be stale
+            const outputs = document.querySelectorAll('.output *, .output')
+            outputs.forEach((output, index) => {
+                output.remove();
+            });
+        }
+
+        // Add event listener for the function to modify code cells
+        const thebelabButtons = document.querySelectorAll('[id^=thebelab], [id$=thebelab]')
+        thebelabButtons.forEach((thebelabButton,index) => {
+            if (thebelabButton === null) {
+                setTimeout(initThebelab, 250)
+                return
+            };
+            thebelabButton.addEventListener('click', addThebelabToCodeCells);
+        });
+    }
+
+    // Initialize Thebelab
+    initFunction(initThebelab);
+</script>
+
+
+
+  <!-- Load the auto-generating TOC -->
+  <script src="/assets/js/tocbot.min.js"  type="text/javascript"></script>
+  <script>
+var initToc = function () {
+  tocbot.init({
+    tocSelector: 'nav.onthispage',
+    contentSelector: '.c-textbook__content',
+    headingSelector: 'h2, h3',
+    orderedList: false,
+    collapseDepth: 6,
+    listClass: 'toc__menu',
+    activeListItemClass: "",  // Not using
+    activeLinkClass: "", // Not using
+  });
+  tocbot.refresh();
+}
+initFunction(initToc);
+</script>
+
+  <!-- Google analytics -->
+  <script src="/assets/js/ga.js" async></script>
+
+  <!-- Clipboard copy button -->
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" async></script>
+
+  <!-- Load JS that depends on site variables -->
+  <script>
+/**
+ * Set up copy/paste for code blocks
+ */
+const codeCellId = index => `codecell${index}`
+
+const clipboardButton = id =>
+  `<a id="copy-button-${id}" class="btn copybtn o-tooltip--left" data-tooltip="Copy" data-clipboard-target="#${id}">
+    <img src="/assets/images/copy-button.svg" alt="Copy to clipboard">
+  </a>`
+
+// Clears selected text since ClipboardJS will select the text when copying
+const clearSelection = () => {
+  if (window.getSelection) {
+    window.getSelection().removeAllRanges()
+  } else if (document.selection) {
+    document.selection.empty()
+  }
+}
+
+// Changes tooltip text for two seconds, then changes it back
+const temporarilyChangeTooltip = (el, newText) => {
+  const oldText = el.getAttribute('data-tooltip')
+  el.setAttribute('data-tooltip', newText)
+  setTimeout(() => el.setAttribute('data-tooltip', oldText), 2000)
+}
+
+const addCopyButtonToCodeCells = () => {
+  // If ClipboardJS hasn't loaded, wait a bit and try again. This
+  // happens because we load ClipboardJS asynchronously.
+  if (window.ClipboardJS === undefined) {
+    setTimeout(addCopyButtonToCodeCells, 250)
+    return
+  }
+
+  const codeCells = document.querySelectorAll('div.c-textbook__content > div.highlighter-rouge > div.highlight > pre, div.input_area pre')
+  codeCells.forEach((codeCell, index) => {
+    const id = codeCellId(index)
+    codeCell.setAttribute('id', id)
+    if (document.getElementById("copy-button" + id) == null) {
+      codeCell.insertAdjacentHTML('afterend', clipboardButton(id));
+    }
+  })
+
+  const clipboard = new ClipboardJS('.copybtn')
+  clipboard.on('success', event => {
+    clearSelection()
+    temporarilyChangeTooltip(event.trigger, 'Copied!')
+  })
+
+  clipboard.on('error', event => {
+    temporarilyChangeTooltip(event.trigger, 'Failed to copy')
+  })
+
+  // Get rid of clipboard before the next page visit to avoid memory leak
+  document.addEventListener('turbolinks:before-visit', () =>
+    clipboard.destroy()
+  )
+}
+
+initFunction(addCopyButtonToCodeCells);
+</script>
+
+
+  <!-- Hide cell code -->
+  
+<script>
+/**
+Add buttons to hide code cells
+*/
+
+
+var setCodeCellVisibility = function(inputField, kind) {
+    // Update the image and class for hidden
+    var id = inputField.getAttribute('data-id');
+    var codeCell = document.querySelector(`#${id} div.highlight`);
+
+    if (kind === "visible") {
+        codeCell.classList.remove('hidden');
+        inputField.checked = true;
+    } else {
+        codeCell.classList.add('hidden');
+        inputField.checked = false;
+    }
+}
+
+var toggleCodeCellVisibility = function (event) {
+    // The label is clicked, and now we decide what to do based on the input field's clicked status
+    if (event.target.tagName === "LABEL") {
+        var inputField = event.target.previousElementSibling;
+    } else {
+        // It is the span inside the target
+        var inputField = event.target.parentElement.previousElementSibling;
+    }
+
+    if (inputField.checked === true) {
+        setCodeCellVisibility(inputField, "visible");
+    } else {
+        setCodeCellVisibility(inputField, "hidden");
+    }
+}
+
+
+// Button constructor
+const hideCodeButton = id => `<input class="hidebtn" type="checkbox" id="hidebtn${id}" data-id="${id}"><label title="Toggle cell" for="hidebtn${id}" class="plusminus"><span class="pm_h"></span><span class="pm_v"></span></label>`
+
+var addHideButton = function () {
+  // If a hide button is already added, don't add another
+  if (document.querySelector('div.hidecode input') !== null) {
+      return;
+  }
+
+  // Find the input cells and add a hide button
+  document.querySelectorAll('div.input_area').forEach(function (item, index) {
+    if (!item.classList.contains("hidecode")) {
+        // Skip the cell if it doesn't have a hidecode class
+        return;
+    }
+
+    const id = codeCellId(index)
+    item.setAttribute('id', id);
+    // Insert the button just inside the end of the next div
+    item.querySelector('div').insertAdjacentHTML('beforeend', hideCodeButton(id))
+
+    // Set up the visibility toggle
+    hideLink = document.querySelector(`#${id} div.highlight + input + label`);
+    hideLink.addEventListener('click', toggleCodeCellVisibility)
+  });
+}
+
+
+// Initialize the hide buttos
+var initHiddenCells = function () {
+    // Add hide buttons to the cells
+    addHideButton();
+
+    // Toggle the code cells that should be hidden
+    document.querySelectorAll('div.hidecode input').forEach(function (item) {
+        setCodeCellVisibility(item, 'hidden');
+        item.checked = true;
+    })
+}
+
+initFunction(initHiddenCells);
+
+</script>
+
+
+  <!-- Load custom website scripts -->
+  <script src="/assets/js/scripts.js" async></script>
+
+  <!-- Load custom user CSS and JS  -->
+  <script src="/assets/custom/custom.js" async></script>
+  <link rel="stylesheet" href="/assets/custom/custom.css">
+
+  <!-- Update interact links w/ REST param, is defined in includes so we can use templates -->
+  
+<script>
+/**
+  * To auto-embed hub URLs in interact links if given in a RESTful fashion
+ */
+
+function getJsonFromUrl(url) {
+  var query = url.split('?');
+  if (query.length < 2) {
+    // No queries so just return false
+    return false;
+  }
+  query = query[1];
+  // Collect REST params into a dictionary
+  var result = {};
+  query.split("&").forEach(function(part) {
+    var item = part.split("=");
+    result[item[0]] = decodeURIComponent(item[1]);
+  });
+  return result;
+}
+    
+function dict2param(dict) {
+    params = Object.keys(dict).map(function(k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(dict[k])
+    });
+    return params.join('&')
+}
+
+// Parse a Binder URL, converting it to the string needed for JupyterHub
+function binder2Jupyterhub(url) {
+  newUrl = {};
+  parts = url.split('v2/gh/')[1];
+  // Grab the base repo information
+  repoinfo = parts.split('?')[0];
+  var [org, repo, ref] = repoinfo.split('/');
+  newUrl['repo'] = ['https://github.com', org, repo].join('/');
+  newUrl['branch'] = ref
+  // Grab extra parameters passed
+  params = getJsonFromUrl(url);
+  if (params['filepath'] !== undefined) {
+    newUrl['subPath'] = params['filepath']
+  }
+  return dict2param(newUrl);
+}
+
+// Filter out potentially unsafe characters to prevent xss
+function safeUrl(url)
+{
+   return String(encodeURIComponent(url))
+            .replace(/&/g, '&amp;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+}
+
+function addParamToInternalLinks(hub) {
+  var links = document.querySelectorAll("a").forEach(function(link) {
+    var href = link.href;
+    // If the link is an internal link...
+    if (href.search("http://0.0.0.0:4000") !== -1 || href.startsWith('/') || href.search("127.0.0.1:") !== -1) {
+      // Assume we're an internal link, add the hub param to it
+      var params = getJsonFromUrl(href);
+      if (params !== false) {
+        // We have REST params, so append a new one
+        params['jupyterhub'] = hub;
+      } else {
+        // Create the REST params
+        params = {'jupyterhub': hub};
+      }
+      // Update the link
+      var newHref = href.split('?')[0] + '?' + dict2param(params);
+      link.setAttribute('href', decodeURIComponent(newHref));
+    }
+  });
+  return false;
+}
+
+
+// Update interact links
+function updateInteractLink() {
+    // hack to make this work since it expects a ? in the URL
+    rest = getJsonFromUrl("?" + location.search.substr(1));
+    jupyterHubUrl = rest['jupyterhub'];
+    var hubType = null;
+    var hubUrl = null;
+    if (jupyterHubUrl !== undefined) {
+      hubType = 'jupyterhub';
+      hubUrl = jupyterHubUrl;
+    }
+
+    if (hubType !== null) {
+      // Sanitize the hubUrl
+      hubUrl = safeUrl(hubUrl);
+
+      // Add HTTP text if omitted
+      if (hubUrl.indexOf('http') < 0) {hubUrl = 'http://' + hubUrl;}
+      var interactButtons = document.querySelectorAll("button.interact-button")
+      var lastButton = interactButtons[interactButtons.length-1];
+      var link = lastButton.parentElement;
+
+      // If we've already run this, skip the link updating
+      if (link.nextElementSibling !== null) {
+        return;
+      }
+
+      // Update the link and add context div
+      var href = link.getAttribute('href');
+      if (lastButton.id === 'interact-button-binder') {
+        // If binder links exist, we need to re-work them for jupyterhub
+        if (hubUrl.indexOf('http%3A%2F%2Flocalhost') > -1) {
+          // If localhost, assume we're working from a local Jupyter server and remove `/hub`
+          first = [hubUrl, 'git-sync'].join('/')
+        } else {
+          first = [hubUrl, 'hub', 'user-redirect', 'git-sync'].join('/')
+        }
+        href = first + '?' + binder2Jupyterhub(href);
+      } else {
+        // If interact button isn't binderhub, assume it's jupyterhub
+        // If JupyterHub links, we only need to replace the hub url
+        href = href.replace("", hubUrl);
+        if (hubUrl.indexOf('http%3A%2F%2Flocalhost') > -1) {
+          // Assume we're working from a local Jupyter server and remove `/hub`
+          href = href.replace("/hub/user-redirect", "");
+        }
+      }
+      link.setAttribute('href', decodeURIComponent(href));
+
+      // Add text after interact link saying where we're launching
+      hubUrlNoHttp = decodeURIComponent(hubUrl).replace('http://', '').replace('https://', '');
+      link.insertAdjacentHTML('afterend', '<div class="interact-context">on ' + hubUrlNoHttp + '</div>');
+
+      // Update internal links so we retain the hub url
+      addParamToInternalLinks(hubUrl);
+    }
+}
+
+runWhenDOMLoaded(updateInteractLink)
+document.addEventListener('turbolinks:load', updateInteractLink)
+</script>
+
+
+  <!-- Lunr search code - will only be executed on the /search page -->
+  <script src="/assets/js/lunr/lunr.min.js" type="text/javascript"></script>
+  <script>var initQuery = function() {
+  // See if we have a search box
+  var searchInput = document.querySelector('input#lunr_search');
+  if (searchInput === null) {
+    return;
+  }
+
+  // Function to parse our lunr cache
+  var idx = lunr(function () {
+    this.field('title')
+    this.field('excerpt')
+    this.field('categories')
+    this.field('tags')
+    this.ref('id')
+
+    this.pipeline.remove(lunr.trimmer)
+
+    for (var item in store) {
+      this.add({
+        title: store[item].title,
+        excerpt: store[item].excerpt,
+        categories: store[item].categories,
+        tags: store[item].tags,
+        id: item
+      })
+    }
+  });
+
+  // Run search upon keyup
+  searchInput.addEventListener('keyup', function () {
+    var resultdiv = document.querySelector('#results');
+    var query = document.querySelector("input#lunr_search").value.toLowerCase();
+    var result =
+      idx.query(function (q) {
+        query.split(lunr.tokenizer.separator).forEach(function (term) {
+          q.term(term, { boost: 100 })
+          if(query.lastIndexOf(" ") != query.length-1){
+            q.term(term, {  usePipeline: false, wildcard: lunr.Query.wildcard.TRAILING, boost: 10 })
+          }
+          if (term != ""){
+            q.term(term, {  usePipeline: false, editDistance: 1, boost: 1 })
+          }
+        })
+      });
+
+      // Empty the results div
+      while (resultdiv.firstChild) {
+        resultdiv.removeChild(resultdiv.firstChild);
+      }
+
+    resultdiv.insertAdjacentHTML('afterbegin', '<p class="results__found">'+result.length+' Result(s) found</p>');
+    for (var item in result) {
+      var ref = result[item].ref;
+      if(store[ref].teaser){
+        var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<div class="archive__item-teaser">'+
+                '<img src="'+store[ref].teaser+'" alt="">'+
+              '</div>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      else{
+    	  var searchitem =
+          '<div class="list__item">'+
+            '<article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">'+
+              '<h2 class="archive__item-title" itemprop="headline">'+
+                '<a href="'+store[ref].url+'" rel="permalink">'+store[ref].title+'</a>'+
+              '</h2>'+
+              '<p class="archive__item-excerpt" itemprop="description">'+store[ref].excerpt.split(" ").splice(0,20).join(" ")+'...</p>'+
+            '</article>'+
+          '</div>';
+      }
+      resultdiv.insertAdjacentHTML('beforeend', searchitem);
+    }
+  });
+};
+
+initFunction(initQuery);
+</script>
+</head>
+
+  <body>
+    <!-- .js-show-sidebar shows sidebar by default -->
+    <div id="js-textbook" class="c-textbook js-show-sidebar">
+      
+
+
+
+<nav id="js-sidebar" class="c-textbook__sidebar">
+  <a href="https://jupyter.org/jupyter-book/"><img src="/images/logo/Python.png" class="textbook_logo" id="sidebar-logo" data-turbolinks-permanent/></a>
+  <h2 class="c-sidebar__title">Python 教程</h2>
+  <ul class="c-sidebar__chapters">
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/intro.html"
+        >
+          
+          目录
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="http://www.momodel.cn:8899/classroom"
+        >
+          
+          Momodel repository
+        </a>
+
+        
+      </li>
+
+      
+    
+      
+      
+        <li class="c-sidebar__chapter"><a class="c-sidebar__entry" href="/search.html">查询</a></li>
+        
+      
+      
+        <li class="c-sidebar__divider"></li>
+        
+      
+      
+        <li><h2 class="c-sidebar__title">书籍内容</li>
+        
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/01/features.html"
+        >
+          
+          第1章 Python 介绍
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/01/01.html"
+                >
+                  
+                  01-1 Python 简介
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/02/features.html"
+        >
+          
+          第2章 Python基础
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/01.html"
+                >
+                  
+                  02-01 Python 入门演示
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/02.html"
+                >
+                  
+                  02-02 Python 数据类型
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/03.html"
+                >
+                  
+                  02-03 Python 数字
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/04.html"
+                >
+                  
+                  02-04 Python 字符串
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/05.html"
+                >
+                  
+                  02-05 索引和切片
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/06.html"
+                >
+                  
+                  02-06 列表
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/07.html"
+                >
+                  
+                  02-07 可变和不可变类型
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/08.html"
+                >
+                  
+                  02-08 元组
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/09.html"
+                >
+                  
+                  02-09 列表与元组的速度比较
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/10.html"
+                >
+                  
+                  02-10 字典
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/11.html"
+                >
+                  
+                  02-11 集合
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/12.html"
+                >
+                  
+                  02-12 不可变集合
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/13.html"
+                >
+                  
+                  02-13 Python 赋值机制
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/14.html"
+                >
+                  
+                  02-14 判断语句
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/15.html"
+                >
+                  
+                  02-15 循环
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/16.html"
+                >
+                  
+                  02-16 列表推导式
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/17.html"
+                >
+                  
+                  02-17 函数
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/18.html"
+                >
+                  
+                  02-18 模块和包
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/19.html"
+                >
+                  
+                  02-19 异常
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/20.html"
+                >
+                  
+                  02-20 警告
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/02/21.html"
+                >
+                  
+                  02-21 文件读写
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/03/features.html"
+        >
+          
+          第3章 Python 进阶
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/03/01.html"
+                >
+                  
+                  03-01 sys 模块简介
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/03/02.html"
+                >
+                  
+                  03-02 与操作系统进行交互 os 模块
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/03/03.html"
+                >
+                  
+                  03-03 CSV 文件和 csv 模块
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/03/04.html"
+                >
+                  
+                  03-04 正则表达式和 re 模块
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/03/05.html"
+                >
+                  
+                  03-05 datetime 模块
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/03/06.html"
+                >
+                  
+                  03-06 SQL 数据库
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/03/07.html"
+                >
+                  
+                  03-07 对象关系映射
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/03/08.html"
+                >
+                  
+                  03-08 函数进阶
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/03/09.html"
+                >
+                  
+                  03-09 迭代器
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/03/10.html"
+                >
+                  
+                  03-10 生成器
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/03/11.html"
+                >
+                  
+                  03-11 with 语句和上下文管理器
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/03/12.html"
+                >
+                  
+                  03-12 装饰器
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/03/13.html"
+                >
+                  
+                  03-13 装饰器的使用
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/03/14.html"
+                >
+                  
+                  03-14 Python 常用模块
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/03/15.html"
+                >
+                  
+                  03-15 作用域
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/03/16.html"
+                >
+                  
+                  03-16 动态编译
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/04/features.html"
+        >
+          
+          第4章 Numpy
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/01.html"
+                >
+                  
+                  04-01 Numpy 简介
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/02.html"
+                >
+                  
+                  04-02 Matplotlib基础
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/03.html"
+                >
+                  
+                  04-03 Numpy 数组及其索引
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/04.html"
+                >
+                  
+                  04-04 数组类型
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/05.html"
+                >
+                  
+                  04-05 数组方法
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/06.html"
+                >
+                  
+                  04-06 数组排序
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/07.html"
+                >
+                  
+                  04-07 数组形状
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/08.html"
+                >
+                  
+                  04-08 对角线
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/09.html"
+                >
+                  
+                  04-09 数组与字符串的转换
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/10.html"
+                >
+                  
+                  04-10 数组属性方法总结
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/11.html"
+                >
+                  
+                  04-11 生成数组的函数
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/12.html"
+                >
+                  
+                  04-12 矩阵
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/13.html"
+                >
+                  
+                  04-13 一般函数
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/14.html"
+                >
+                  
+                  04-14 向量化函数
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/15.html"
+                >
+                  
+                  04-15 二元运算
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/16.html"
+                >
+                  
+                  04-16 ufunc 对象
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/17.html"
+                >
+                  
+                  04-17 choose 函数
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/18.html"
+                >
+                  
+                  04-18 数组广播机制
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/19.html"
+                >
+                  
+                  04-19 数组读写
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/20.html"
+                >
+                  
+                  04-20 结构化数组
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/21.html"
+                >
+                  
+                  04-21 记录数组
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/22.html"
+                >
+                  
+                  04-22 内存映射
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/04/23.html"
+                >
+                  
+                  04-23 从 Matlab 到 Numpy
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/05/features.html"
+        >
+          
+          第5章 Pandas
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry c-sidebar__entry--active"
+                  href="/05/01.html"
+                >
+                  
+                  05-01 十分钟上手 Pandas
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/05/02.html"
+                >
+                  
+                  05-02 Series
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/05/03.html"
+                >
+                  
+                  05-03 Dataframe
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/06/features.html"
+        >
+          
+          第6章 Matplotlib
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/06/01.html"
+                >
+                  
+                  06-01 Pyplot 教程
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/06/02.html"
+                >
+                  
+                  06-02 使用 style 来配置 pyplot 风格
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/06/03.html"
+                >
+                  
+                  06-03 处理文本（基础）
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/06/04.html"
+                >
+                  
+                  06-04 处理文本（数学表达式）
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/06/05.html"
+                >
+                  
+                  06-05 图像基础
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/06/06.html"
+                >
+                  
+                  06-06 注释
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/06/07.html"
+                >
+                  
+                  06-07 标签
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/06/08.html"
+                >
+                  
+                  06-08 figures, subplots, axes 和 ticks 对象
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/06/09.html"
+                >
+                  
+                  06-09 不要迷信默认设置
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/06/10.html"
+                >
+                  
+                  06-10 各种绘图实例
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/07/features.html"
+        >
+          
+          第7章 Scipy
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/07/01.html"
+                >
+                  
+                  07-01 Scientific Python 简介
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/07/02.html"
+                >
+                  
+                  07-02 插值
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/07/03.html"
+                >
+                  
+                  07-03 统计概率方法
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/07/04.html"
+                >
+                  
+                  07-04 曲线拟合
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/07/05.html"
+                >
+                  
+                  07-05 最小化函数
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/07/06.html"
+                >
+                  
+                  07-06 积分
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/07/07.html"
+                >
+                  
+                  07-07 解微分方程
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/07/08.html"
+                >
+                  
+                  07-08 稀疏矩阵
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/07/09.html"
+                >
+                  
+                  07-09 线性代数
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/07/10.html"
+                >
+                  
+                  07-10 系数矩阵的线性代数
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+      
+      
+
+      
+      
+
+      
+      
+      <li class="c-sidebar__chapter">
+        <a class="c-sidebar__entry "
+          href="/08/features.html"
+        >
+          
+          第8章 Python 有用的库
+        </a>
+
+        
+
+          
+          
+          
+          
+
+          
+
+          <ul class="c-sidebar__sections ">
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/08/01.html"
+                >
+                  
+                  08-01 pprint 模块
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/08/02.html"
+                >
+                  
+                  08-02 pickle 和 cPickle 模块
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/08/03.html"
+                >
+                  
+                  08-03 json 模块
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/08/04.html"
+                >
+                  
+                  08-04 glob 模块
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/08/05.html"
+                >
+                  
+                  08-05 shutil 模块
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/08/06.html"
+                >
+                  
+                  08-06 gzip, zipfile, tarfile 模块
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/08/07.html"
+                >
+                  
+                  08-07 logging 模块
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/08/08.html"
+                >
+                  
+                  08-08 string 模块
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/08/09.html"
+                >
+                  
+                  08-09 collections 模块
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+              
+              
+
+              <li class="c-sidebar__section">
+                <a class="c-sidebar__entry "
+                  href="/08/10.html"
+                >
+                  
+                  08-10 requests 模块
+                </a>
+
+                
+                
+
+              </li>
+              
+            
+          </ul>
+        
+      </li>
+
+      
+    
+  </ul>
+  <p class="sidebar_footer">Powered by <a href="http://www.momodel.cn:8899/classroom">Python 教程</a></p>
+</nav>
+
+      
+      <!-- Empty sidebar placeholder that we'll auto-fill with javascript -->
+      <aside class="sidebar__right">
+          <header><h4 class="nav__title"><i class="fa fa-list"></i>   On this page</h4></header>
+          <nav class="onthispage">
+          </nav>
+      </aside>
+      
+      <main class="c-textbook__page" tabindex="-1">
+          <div class="o-wrapper">
+            <div class="c-sidebar-toggle">
+  <!-- We show the sidebar by default so we use .is-active -->
+  <button
+    id="js-sidebar-toggle"
+    class="hamburger hamburger--arrowalt is-active"
+  >
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+    <span class="c-sidebar-toggle__label">Toggle Sidebar</span>
+  </button>
+</div>
+
+            
+<div class="buttons">
+<a href="/content/D:%5CZU_workplace%5C08_book%5CPython-book%5CPythonbook1%5Ccontent%5C05/01.ipynb" download>
+<button id="interact-button-download" class="interact-button">Download</button>
+</a>
+
+<button id="interact-button-thebelab" class="interact-button">Thebelab</button>
+
+
+
+
+
+
+
+
+
+<a href="https://mybinder.org/v2/gh/momodel/Pythonbook/master?filepath=content%2FD%3A%5CZU_workplace%5C08_book%5CPython-book%5CPythonbook1%5Ccontent%5C05%2F01.ipynb"><button class="interact-button" id="interact-button-binder"><img class="interact-button-logo" src="/assets/images/logo_binder.svg" alt="Interact" />Interact</button></a>
+
+
+</div>
+
+
+            <div class="c-textbook__content">
+              <h1 id="十分钟上手-pandas">十分钟上手 Pandas</h1>
+
+<p><code class="highlighter-rouge">pandas</code> 是一个 <code class="highlighter-rouge">Python Data Analysis Library</code>。</p>
+
+<p>安装请参考官网的教程，如果安装了 <code class="highlighter-rouge">Anaconda</code>，则不需要安装 <code class="highlighter-rouge">pandas</code> 库。</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</code></pre></div>    </div>
+  </div>
+
+</div>
+
+<h2 id="产生-pandas-对象">产生 Pandas 对象</h2>
+
+<p><code class="highlighter-rouge">pandas</code> 中有三种基本结构：</p>
+
+<ul>
+  <li><code class="highlighter-rouge">Series</code>
+    <ul>
+      <li>1D labeled homogeneously-typed array</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">DataFrame</code>
+    <ul>
+      <li>General 2D labeled, size-mutable tabular structure with potentially heterogeneously-typed columns</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">Panel</code>
+    <ul>
+      <li>General 3D labeled, also size-mutable array</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="series">Series</h3>
+
+<p>一维 <code class="highlighter-rouge">Series</code> 可以用一维列表初始化：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
+
+<span class="k">print</span> <span class="n">s</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+      <div class="output_stream highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0     1
+1     3
+2     5
+3   NaN
+4     6
+5     8
+dtype: float64
+</code></pre></div>      </div>
+    </div>
+  </div>
+</div>
+
+<p>默认情况下，<code class="highlighter-rouge">Series</code> 的下标都是数字（可以使用额外参数指定），类型是统一的。</p>
+
+<h3 id="dataframe">DataFrame</h3>
+
+<p><code class="highlighter-rouge">DataFrame</code> 则是个二维结构，这里首先构造一组时间序列，作为我们第一维的下标：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s">'20130101'</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">dates</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+      <div class="output_stream highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DatetimeIndex(['2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04',
+               '2013-01-05', '2013-01-06'],
+              dtype='datetime64[ns]', freq='D')
+</code></pre></div>      </div>
+    </div>
+  </div>
+</div>
+
+<p>然后创建一个 <code class="highlighter-rouge">DataFrame</code> 结构：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s">'ABCD'</span><span class="p">))</span>
+
+<span class="n">df</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>-0.605936</td>
+      <td>-0.861658</td>
+      <td>-1.001924</td>
+      <td>1.528584</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>-0.165408</td>
+      <td>0.388338</td>
+      <td>1.187187</td>
+      <td>1.819818</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>0.065255</td>
+      <td>-1.608074</td>
+      <td>-1.282331</td>
+      <td>-0.286067</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>1.289305</td>
+      <td>0.497115</td>
+      <td>-0.225351</td>
+      <td>0.040239</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>0.038232</td>
+      <td>0.875057</td>
+      <td>-0.092526</td>
+      <td>0.934432</td>
+    </tr>
+    <tr>
+      <th>2013-01-06</th>
+      <td>-2.163453</td>
+      <td>-0.010279</td>
+      <td>1.699886</td>
+      <td>1.291653</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>默认情况下，如果不指定 <code class="highlighter-rouge">index</code> 参数和 <code class="highlighter-rouge">columns</code>，那么他们的值将用从 <code class="highlighter-rouge">0</code> 开始的数字替代。</p>
+
+<p>除了向 <code class="highlighter-rouge">DataFrame</code> 中传入二维数组，我们也可以使用字典传入数据：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'A'</span> <span class="p">:</span> <span class="mf">1.</span><span class="p">,</span>
+                    <span class="s">'B'</span> <span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s">'20130102'</span><span class="p">),</span>
+                    <span class="s">'C'</span> <span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)),</span><span class="n">dtype</span><span class="o">=</span><span class="s">'float32'</span><span class="p">),</span>
+                    <span class="s">'D'</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s">'int32'</span><span class="p">),</span>
+                    <span class="s">'E'</span> <span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">([</span><span class="s">"test"</span><span class="p">,</span><span class="s">"train"</span><span class="p">,</span><span class="s">"test"</span><span class="p">,</span><span class="s">"train"</span><span class="p">]),</span>
+                    <span class="s">'F'</span> <span class="p">:</span> <span class="s">'foo'</span> <span class="p">})</span>
+
+<span class="n">df2</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>E</th>
+      <th>F</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>2013-01-02</td>
+      <td>1</td>
+      <td>3</td>
+      <td>test</td>
+      <td>foo</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>2013-01-02</td>
+      <td>1</td>
+      <td>3</td>
+      <td>train</td>
+      <td>foo</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>2013-01-02</td>
+      <td>1</td>
+      <td>3</td>
+      <td>test</td>
+      <td>foo</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>2013-01-02</td>
+      <td>1</td>
+      <td>3</td>
+      <td>train</td>
+      <td>foo</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>字典的每个 <code class="highlighter-rouge">key</code> 代表一列，其 <code class="highlighter-rouge">value</code> 可以是各种能够转化为 <code class="highlighter-rouge">Series</code> 的对象。</p>
+
+<p>与 <code class="highlighter-rouge">Series</code> 要求所有的类型都一致不同，<code class="highlighter-rouge">DataFrame</code> 值要求每一列数据的格式相同：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df2</span><span class="o">.</span><span class="n">dtypes</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A           float64
+B    datetime64[ns]
+C           float32
+D             int32
+E          category
+F            object
+dtype: object
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<h2 id="查看数据">查看数据</h2>
+
+<h3 id="头尾数据">头尾数据</h3>
+
+<p><code class="highlighter-rouge">head</code> 和 <code class="highlighter-rouge">tail</code> 方法可以分别查看最前面几行和最后面几行的数据（默认为 5）：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>-0.605936</td>
+      <td>-0.861658</td>
+      <td>-1.001924</td>
+      <td>1.528584</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>-0.165408</td>
+      <td>0.388338</td>
+      <td>1.187187</td>
+      <td>1.819818</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>0.065255</td>
+      <td>-1.608074</td>
+      <td>-1.282331</td>
+      <td>-0.286067</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>1.289305</td>
+      <td>0.497115</td>
+      <td>-0.225351</td>
+      <td>0.040239</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>0.038232</td>
+      <td>0.875057</td>
+      <td>-0.092526</td>
+      <td>0.934432</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>最后 3 行：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-04</th>
+      <td>1.289305</td>
+      <td>0.497115</td>
+      <td>-0.225351</td>
+      <td>0.040239</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>0.038232</td>
+      <td>0.875057</td>
+      <td>-0.092526</td>
+      <td>0.934432</td>
+    </tr>
+    <tr>
+      <th>2013-01-06</th>
+      <td>-2.163453</td>
+      <td>-0.010279</td>
+      <td>1.699886</td>
+      <td>1.291653</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<h3 id="下标列标数据">下标，列标，数据</h3>
+
+<p>下标使用 <code class="highlighter-rouge">index</code> 属性查看：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">index</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DatetimeIndex(['2013-01-01', '2013-01-02', '2013-01-03', '2013-01-04',
+               '2013-01-05', '2013-01-06'],
+              dtype='datetime64[ns]', freq='D')
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<p>列标使用 <code class="highlighter-rouge">columns</code> 属性查看：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Index([u'A', u'B', u'C', u'D'], dtype='object')
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<p>数据值使用 <code class="highlighter-rouge">values</code> 查看：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">values</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array([[-0.60593585, -0.86165752, -1.00192387,  1.52858443],
+       [-0.16540784,  0.38833783,  1.18718697,  1.81981793],
+       [ 0.06525454, -1.60807414, -1.2823306 , -0.28606716],
+       [ 1.28930486,  0.49711531, -0.22535143,  0.04023897],
+       [ 0.03823179,  0.87505664, -0.0925258 ,  0.93443212],
+       [-2.16345271, -0.01027865,  1.69988608,  1.29165337]])
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<h3 id="统计数据">统计数据</h3>
+
+<p>查看简单的统计数据：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>6.000000</td>
+      <td>6.000000</td>
+      <td>6.000000</td>
+      <td>6.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>-0.257001</td>
+      <td>-0.119917</td>
+      <td>0.047490</td>
+      <td>0.888110</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.126657</td>
+      <td>0.938705</td>
+      <td>1.182629</td>
+      <td>0.841529</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>-2.163453</td>
+      <td>-1.608074</td>
+      <td>-1.282331</td>
+      <td>-0.286067</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>-0.495804</td>
+      <td>-0.648813</td>
+      <td>-0.807781</td>
+      <td>0.263787</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>-0.063588</td>
+      <td>0.189030</td>
+      <td>-0.158939</td>
+      <td>1.113043</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>0.058499</td>
+      <td>0.469921</td>
+      <td>0.867259</td>
+      <td>1.469352</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>1.289305</td>
+      <td>0.875057</td>
+      <td>1.699886</td>
+      <td>1.819818</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<h3 id="转置">转置</h3>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">T</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>2013-01-01 00:00:00</th>
+      <th>2013-01-02 00:00:00</th>
+      <th>2013-01-03 00:00:00</th>
+      <th>2013-01-04 00:00:00</th>
+      <th>2013-01-05 00:00:00</th>
+      <th>2013-01-06 00:00:00</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A</th>
+      <td>-0.605936</td>
+      <td>-0.165408</td>
+      <td>0.065255</td>
+      <td>1.289305</td>
+      <td>0.038232</td>
+      <td>-2.163453</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>-0.861658</td>
+      <td>0.388338</td>
+      <td>-1.608074</td>
+      <td>0.497115</td>
+      <td>0.875057</td>
+      <td>-0.010279</td>
+    </tr>
+    <tr>
+      <th>C</th>
+      <td>-1.001924</td>
+      <td>1.187187</td>
+      <td>-1.282331</td>
+      <td>-0.225351</td>
+      <td>-0.092526</td>
+      <td>1.699886</td>
+    </tr>
+    <tr>
+      <th>D</th>
+      <td>1.528584</td>
+      <td>1.819818</td>
+      <td>-0.286067</td>
+      <td>0.040239</td>
+      <td>0.934432</td>
+      <td>1.291653</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<h2 id="排序">排序</h2>
+
+<p><code class="highlighter-rouge">sort_index(axis=0, ascending=True)</code> 方法按照下标大小进行排序，<code class="highlighter-rouge">axis=0</code> 表示按第 0 维进行排序。</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-06</th>
+      <td>-2.163453</td>
+      <td>-0.010279</td>
+      <td>1.699886</td>
+      <td>1.291653</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>0.038232</td>
+      <td>0.875057</td>
+      <td>-0.092526</td>
+      <td>0.934432</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>1.289305</td>
+      <td>0.497115</td>
+      <td>-0.225351</td>
+      <td>0.040239</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>0.065255</td>
+      <td>-1.608074</td>
+      <td>-1.282331</td>
+      <td>-0.286067</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>-0.165408</td>
+      <td>0.388338</td>
+      <td>1.187187</td>
+      <td>1.819818</td>
+    </tr>
+    <tr>
+      <th>2013-01-01</th>
+      <td>-0.605936</td>
+      <td>-0.861658</td>
+      <td>-1.001924</td>
+      <td>1.528584</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>D</th>
+      <th>C</th>
+      <th>B</th>
+      <th>A</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>1.528584</td>
+      <td>-1.001924</td>
+      <td>-0.861658</td>
+      <td>-0.605936</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>1.819818</td>
+      <td>1.187187</td>
+      <td>0.388338</td>
+      <td>-0.165408</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>-0.286067</td>
+      <td>-1.282331</td>
+      <td>-1.608074</td>
+      <td>0.065255</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>0.040239</td>
+      <td>-0.225351</td>
+      <td>0.497115</td>
+      <td>1.289305</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>0.934432</td>
+      <td>-0.092526</td>
+      <td>0.875057</td>
+      <td>0.038232</td>
+    </tr>
+    <tr>
+      <th>2013-01-06</th>
+      <td>1.291653</td>
+      <td>1.699886</td>
+      <td>-0.010279</td>
+      <td>-2.163453</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p><code class="highlighter-rouge">sort_values(by, axis=0, ascending=True)</code> 方法按照 <code class="highlighter-rouge">by</code> 的值的大小进行排序，例如按照 <code class="highlighter-rouge">B</code> 列的大小：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s">"B"</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-03</th>
+      <td>0.065255</td>
+      <td>-1.608074</td>
+      <td>-1.282331</td>
+      <td>-0.286067</td>
+    </tr>
+    <tr>
+      <th>2013-01-01</th>
+      <td>-0.605936</td>
+      <td>-0.861658</td>
+      <td>-1.001924</td>
+      <td>1.528584</td>
+    </tr>
+    <tr>
+      <th>2013-01-06</th>
+      <td>-2.163453</td>
+      <td>-0.010279</td>
+      <td>1.699886</td>
+      <td>1.291653</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>-0.165408</td>
+      <td>0.388338</td>
+      <td>1.187187</td>
+      <td>1.819818</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>1.289305</td>
+      <td>0.497115</td>
+      <td>-0.225351</td>
+      <td>0.040239</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>0.038232</td>
+      <td>0.875057</td>
+      <td>-0.092526</td>
+      <td>0.934432</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<h2 id="索引">索引</h2>
+
+<p>虽然 <code class="highlighter-rouge">DataFrame</code> 支持 <code class="highlighter-rouge">Python/Numpy</code> 的索引语法，但是推荐使用 <code class="highlighter-rouge">.at, .iat, .loc, .iloc 和 .ix</code> 方法进行索引。</p>
+
+<h3 id="读取数据">读取数据</h3>
+
+<p>选择单列数据：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="s">"A"</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2013-01-01   -0.605936
+2013-01-02   -0.165408
+2013-01-03    0.065255
+2013-01-04    1.289305
+2013-01-05    0.038232
+2013-01-06   -2.163453
+Freq: D, Name: A, dtype: float64
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<p>也可以用 <code class="highlighter-rouge">df.A</code>：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">A</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2013-01-01   -0.605936
+2013-01-02   -0.165408
+2013-01-03    0.065255
+2013-01-04    1.289305
+2013-01-05    0.038232
+2013-01-06   -2.163453
+Freq: D, Name: A, dtype: float64
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<p>使用切片读取多行：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>-0.605936</td>
+      <td>-0.861658</td>
+      <td>-1.001924</td>
+      <td>1.528584</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>-0.165408</td>
+      <td>0.388338</td>
+      <td>1.187187</td>
+      <td>1.819818</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>0.065255</td>
+      <td>-1.608074</td>
+      <td>-1.282331</td>
+      <td>-0.286067</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p><code class="highlighter-rouge">index</code> 名字也可以进行切片：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="s">"20130101"</span><span class="p">:</span><span class="s">"20130103"</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>-0.605936</td>
+      <td>-0.861658</td>
+      <td>-1.001924</td>
+      <td>1.528584</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>-0.165408</td>
+      <td>0.388338</td>
+      <td>1.187187</td>
+      <td>1.819818</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>0.065255</td>
+      <td>-1.608074</td>
+      <td>-1.282331</td>
+      <td>-0.286067</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<h3 id="使用-label-索引">使用 <code class="highlighter-rouge">label</code> 索引</h3>
+
+<p><code class="highlighter-rouge">loc</code> 可以方便的使用 <code class="highlighter-rouge">label</code> 进行索引：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A   -0.605936
+B   -0.861658
+C   -1.001924
+D    1.528584
+Name: 2013-01-01 00:00:00, dtype: float64
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<p>多列数据：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,[</span><span class="s">'A'</span><span class="p">,</span><span class="s">'B'</span><span class="p">]]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>-0.605936</td>
+      <td>-0.861658</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>-0.165408</td>
+      <td>0.388338</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>0.065255</td>
+      <td>-1.608074</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>1.289305</td>
+      <td>0.497115</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>0.038232</td>
+      <td>0.875057</td>
+    </tr>
+    <tr>
+      <th>2013-01-06</th>
+      <td>-2.163453</td>
+      <td>-0.010279</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>选择多行多列：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s">'20130102'</span><span class="p">:</span><span class="s">'20130104'</span><span class="p">,[</span><span class="s">'A'</span><span class="p">,</span><span class="s">'B'</span><span class="p">]]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-02</th>
+      <td>-0.165408</td>
+      <td>0.388338</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>0.065255</td>
+      <td>-1.608074</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>1.289305</td>
+      <td>0.497115</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>数据降维：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s">'20130102'</span><span class="p">,[</span><span class="s">'A'</span><span class="p">,</span><span class="s">'B'</span><span class="p">]]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A   -0.165408
+B    0.388338
+Name: 2013-01-02 00:00:00, dtype: float64
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<p>得到标量值：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s">'B'</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-0.86165751902832299
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<p>不过得到标量值可以用 <code class="highlighter-rouge">at</code>，速度更快：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n100</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s">'B'</span><span class="p">]</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n100</span> <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s">'B'</span><span class="p">]</span>
+
+<span class="k">print</span> <span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s">'B'</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+      <div class="output_stream highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100 loops, best of 3: 329 µs per loop
+100 loops, best of 3: 31.1 µs per loop
+-0.861657519028
+</code></pre></div>      </div>
+    </div>
+  </div>
+</div>
+
+<h3 id="使用位置索引">使用位置索引</h3>
+
+<p><code class="highlighter-rouge">iloc</code> 使用位置进行索引：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A    1.289305
+B    0.497115
+C   -0.225351
+D    0.040239
+Name: 2013-01-04 00:00:00, dtype: float64
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<p>连续切片：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-04</th>
+      <td>1.289305</td>
+      <td>0.497115</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>0.038232</td>
+      <td>0.875057</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>索引不连续的部分：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-02</th>
+      <td>-0.165408</td>
+      <td>1.187187</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>0.065255</td>
+      <td>-1.282331</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>0.038232</td>
+      <td>-0.092526</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>索引整行：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,:]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-02</th>
+      <td>-0.165408</td>
+      <td>0.388338</td>
+      <td>1.187187</td>
+      <td>1.819818</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>0.065255</td>
+      <td>-1.608074</td>
+      <td>-1.282331</td>
+      <td>-0.286067</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>整列：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>-0.861658</td>
+      <td>-1.001924</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>0.388338</td>
+      <td>1.187187</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>-1.608074</td>
+      <td>-1.282331</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>0.497115</td>
+      <td>-0.225351</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>0.875057</td>
+      <td>-0.092526</td>
+    </tr>
+    <tr>
+      <th>2013-01-06</th>
+      <td>-0.010279</td>
+      <td>1.699886</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>标量值：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.3883378290420279
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<p>当然，使用 <code class="highlighter-rouge">iat</code> 索引标量值更快：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n100</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="o">%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n100</span> <span class="n">df</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+      <div class="output_stream highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100 loops, best of 3: 236 µs per loop
+100 loops, best of 3: 14.5 µs per loop
+</code></pre></div>      </div>
+    </div>
+  </div>
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.3883378290420279
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<h3 id="布尔型索引">布尔型索引</h3>
+
+<p>所有 <code class="highlighter-rouge">A</code> 列大于 0 的行：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">A</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-03</th>
+      <td>0.065255</td>
+      <td>-1.608074</td>
+      <td>-1.282331</td>
+      <td>-0.286067</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>1.289305</td>
+      <td>0.497115</td>
+      <td>-0.225351</td>
+      <td>0.040239</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>0.038232</td>
+      <td>0.875057</td>
+      <td>-0.092526</td>
+      <td>0.934432</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>只留下所有大于 0 的数值：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="n">df</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.528584</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>NaN</td>
+      <td>0.388338</td>
+      <td>1.187187</td>
+      <td>1.819818</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>0.065255</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>1.289305</td>
+      <td>0.497115</td>
+      <td>NaN</td>
+      <td>0.040239</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>0.038232</td>
+      <td>0.875057</td>
+      <td>NaN</td>
+      <td>0.934432</td>
+    </tr>
+    <tr>
+      <th>2013-01-06</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.699886</td>
+      <td>1.291653</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>使用 <code class="highlighter-rouge">isin</code> 方法做 <code class="highlighter-rouge">filter</code> 过滤：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df2</span><span class="p">[</span><span class="s">'E'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">'one'</span><span class="p">,</span> <span class="s">'one'</span><span class="p">,</span><span class="s">'two'</span><span class="p">,</span><span class="s">'three'</span><span class="p">,</span><span class="s">'four'</span><span class="p">,</span><span class="s">'three'</span><span class="p">]</span>
+
+<span class="n">df2</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>E</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>-0.605936</td>
+      <td>-0.861658</td>
+      <td>-1.001924</td>
+      <td>1.528584</td>
+      <td>one</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>-0.165408</td>
+      <td>0.388338</td>
+      <td>1.187187</td>
+      <td>1.819818</td>
+      <td>one</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>0.065255</td>
+      <td>-1.608074</td>
+      <td>-1.282331</td>
+      <td>-0.286067</td>
+      <td>two</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>1.289305</td>
+      <td>0.497115</td>
+      <td>-0.225351</td>
+      <td>0.040239</td>
+      <td>three</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>0.038232</td>
+      <td>0.875057</td>
+      <td>-0.092526</td>
+      <td>0.934432</td>
+      <td>four</td>
+    </tr>
+    <tr>
+      <th>2013-01-06</th>
+      <td>-2.163453</td>
+      <td>-0.010279</td>
+      <td>1.699886</td>
+      <td>1.291653</td>
+      <td>three</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df2</span><span class="p">[</span><span class="n">df2</span><span class="p">[</span><span class="s">'E'</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s">'two'</span><span class="p">,</span><span class="s">'four'</span><span class="p">])]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>E</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-03</th>
+      <td>0.065255</td>
+      <td>-1.608074</td>
+      <td>-1.282331</td>
+      <td>-0.286067</td>
+      <td>two</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>0.038232</td>
+      <td>0.875057</td>
+      <td>-0.092526</td>
+      <td>0.934432</td>
+      <td>four</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<h3 id="设定数据的值">设定数据的值</h3>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s">'20130102'</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">6</span><span class="p">))</span>
+
+<span class="n">s1</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2013-01-02    1
+2013-01-03    2
+2013-01-04    3
+2013-01-05    4
+2013-01-06    5
+2013-01-07    6
+Freq: D, dtype: int64
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<p>像字典一样，直接指定 <code class="highlighter-rouge">F</code> 列的值为 <code class="highlighter-rouge">s1</code>，此时以 <code class="highlighter-rouge">df</code> 已有的 <code class="highlighter-rouge">index</code> 为标准将二者进行合并，<code class="highlighter-rouge">s1</code> 中没有的 <code class="highlighter-rouge">index</code> 项设为 <code class="highlighter-rouge">NaN</code>，多余的项舍去：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="s">'F'</span><span class="p">]</span> <span class="o">=</span> <span class="n">s1</span>
+
+<span class="n">df</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>F</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>-0.605936</td>
+      <td>-0.861658</td>
+      <td>-1.001924</td>
+      <td>1.528584</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>-0.165408</td>
+      <td>0.388338</td>
+      <td>1.187187</td>
+      <td>1.819818</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>0.065255</td>
+      <td>-1.608074</td>
+      <td>-1.282331</td>
+      <td>-0.286067</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>1.289305</td>
+      <td>0.497115</td>
+      <td>-0.225351</td>
+      <td>0.040239</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>0.038232</td>
+      <td>0.875057</td>
+      <td>-0.092526</td>
+      <td>0.934432</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2013-01-06</th>
+      <td>-2.163453</td>
+      <td>-0.010279</td>
+      <td>1.699886</td>
+      <td>1.291653</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>或者使用 <code class="highlighter-rouge">at</code> 或 <code class="highlighter-rouge">iat</code> 修改单个值：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s">'A'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">df</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>F</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>0.000000</td>
+      <td>-0.861658</td>
+      <td>-1.001924</td>
+      <td>1.528584</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>-0.165408</td>
+      <td>0.388338</td>
+      <td>1.187187</td>
+      <td>1.819818</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>0.065255</td>
+      <td>-1.608074</td>
+      <td>-1.282331</td>
+      <td>-0.286067</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>1.289305</td>
+      <td>0.497115</td>
+      <td>-0.225351</td>
+      <td>0.040239</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>0.038232</td>
+      <td>0.875057</td>
+      <td>-0.092526</td>
+      <td>0.934432</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2013-01-06</th>
+      <td>-2.163453</td>
+      <td>-0.010279</td>
+      <td>1.699886</td>
+      <td>1.291653</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">df</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>F</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-1.001924</td>
+      <td>1.528584</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>-0.165408</td>
+      <td>0.388338</td>
+      <td>1.187187</td>
+      <td>1.819818</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>0.065255</td>
+      <td>-1.608074</td>
+      <td>-1.282331</td>
+      <td>-0.286067</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>1.289305</td>
+      <td>0.497115</td>
+      <td>-0.225351</td>
+      <td>0.040239</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>0.038232</td>
+      <td>0.875057</td>
+      <td>-0.092526</td>
+      <td>0.934432</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2013-01-06</th>
+      <td>-2.163453</td>
+      <td>-0.010279</td>
+      <td>1.699886</td>
+      <td>1.291653</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>设定一整列：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s">'D'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+
+<span class="n">df</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>F</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-1.001924</td>
+      <td>5</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>-0.165408</td>
+      <td>0.388338</td>
+      <td>1.187187</td>
+      <td>5</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>0.065255</td>
+      <td>-1.608074</td>
+      <td>-1.282331</td>
+      <td>5</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>1.289305</td>
+      <td>0.497115</td>
+      <td>-0.225351</td>
+      <td>5</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>0.038232</td>
+      <td>0.875057</td>
+      <td>-0.092526</td>
+      <td>5</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2013-01-06</th>
+      <td>-2.163453</td>
+      <td>-0.010279</td>
+      <td>1.699886</td>
+      <td>5</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>设定满足条件的数值：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="n">df2</span><span class="p">[</span><span class="n">df2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">df2</span>
+
+<span class="n">df2</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>F</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-1.001924</td>
+      <td>-5</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>-0.165408</td>
+      <td>-0.388338</td>
+      <td>-1.187187</td>
+      <td>-5</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>-0.065255</td>
+      <td>-1.608074</td>
+      <td>-1.282331</td>
+      <td>-5</td>
+      <td>-2</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>-1.289305</td>
+      <td>-0.497115</td>
+      <td>-0.225351</td>
+      <td>-5</td>
+      <td>-3</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>-0.038232</td>
+      <td>-0.875057</td>
+      <td>-0.092526</td>
+      <td>-5</td>
+      <td>-4</td>
+    </tr>
+    <tr>
+      <th>2013-01-06</th>
+      <td>-2.163453</td>
+      <td>-0.010279</td>
+      <td>-1.699886</td>
+      <td>-5</td>
+      <td>-5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<h2 id="缺失数据">缺失数据</h2>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df1</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s">'E'</span><span class="p">])</span>
+<span class="n">df1</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">dates</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s">'E'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">df1</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>F</th>
+      <th>E</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-1.001924</td>
+      <td>5</td>
+      <td>NaN</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>-0.165408</td>
+      <td>0.388338</td>
+      <td>1.187187</td>
+      <td>5</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>0.065255</td>
+      <td>-1.608074</td>
+      <td>-1.282331</td>
+      <td>5</td>
+      <td>2</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>1.289305</td>
+      <td>0.497115</td>
+      <td>-0.225351</td>
+      <td>5</td>
+      <td>3</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>丢弃所有缺失数据的行得到的新数据：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df1</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s">'any'</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>F</th>
+      <th>E</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-02</th>
+      <td>-0.165408</td>
+      <td>0.388338</td>
+      <td>1.187187</td>
+      <td>5</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>填充缺失数据：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df1</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>F</th>
+      <th>E</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-1.001924</td>
+      <td>5</td>
+      <td>5</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>-0.165408</td>
+      <td>0.388338</td>
+      <td>1.187187</td>
+      <td>5</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>0.065255</td>
+      <td>-1.608074</td>
+      <td>-1.282331</td>
+      <td>5</td>
+      <td>2</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>1.289305</td>
+      <td>0.497115</td>
+      <td>-0.225351</td>
+      <td>5</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>检查缺失数据的位置：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="o">.</span><span class="n">isnull</span><span class="p">(</span><span class="n">df1</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>F</th>
+      <th>E</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<h2 id="计算操作">计算操作</h2>
+
+<h3 id="统计信息">统计信息</h3>
+
+<p>每一列的均值：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A   -0.156012
+B    0.023693
+C    0.047490
+D    5.000000
+F    3.000000
+dtype: float64
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<p>每一行的均值：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2013-01-01    0.999519
+2013-01-02    1.482023
+2013-01-03    0.834970
+2013-01-04    1.912214
+2013-01-05    1.964153
+2013-01-06    1.905231
+Freq: D, dtype: float64
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<p>多个对象之间的操作，如果维度不对，<code class="highlighter-rouge">pandas</code> 会自动调用 <code class="highlighter-rouge">broadcasting</code> 机制：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">8</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">)</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">s</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+      <div class="output_stream highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2013-01-01   NaN
+2013-01-02   NaN
+2013-01-03     1
+2013-01-04     3
+2013-01-05     5
+2013-01-06   NaN
+Freq: D, dtype: float64
+</code></pre></div>      </div>
+    </div>
+  </div>
+</div>
+
+<p>相减 <code class="highlighter-rouge">df - s</code>：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s">'index'</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>F</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>-0.934745</td>
+      <td>-2.608074</td>
+      <td>-2.282331</td>
+      <td>4</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>-1.710695</td>
+      <td>-2.502885</td>
+      <td>-3.225351</td>
+      <td>2</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>-4.961768</td>
+      <td>-4.124943</td>
+      <td>-5.092526</td>
+      <td>0</td>
+      <td>-1</td>
+    </tr>
+    <tr>
+      <th>2013-01-06</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<h3 id="apply-操作">apply 操作</h3>
+
+<p>与 <code class="highlighter-rouge">R</code> 中的 <code class="highlighter-rouge">apply</code> 操作类似，接收一个函数，默认是对将函数作用到每一列上：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+      <th>F</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2013-01-01</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-1.001924</td>
+      <td>5</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2013-01-02</th>
+      <td>-0.165408</td>
+      <td>0.388338</td>
+      <td>0.185263</td>
+      <td>10</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2013-01-03</th>
+      <td>-0.100153</td>
+      <td>-1.219736</td>
+      <td>-1.097067</td>
+      <td>15</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2013-01-04</th>
+      <td>1.189152</td>
+      <td>-0.722621</td>
+      <td>-1.322419</td>
+      <td>20</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>2013-01-05</th>
+      <td>1.227383</td>
+      <td>0.152436</td>
+      <td>-1.414945</td>
+      <td>25</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>2013-01-06</th>
+      <td>-0.936069</td>
+      <td>0.142157</td>
+      <td>0.284941</td>
+      <td>30</td>
+      <td>15</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>求每列最大最小值之差：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="nb">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="nb">min</span><span class="p">())</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A    3.452758
+B    2.483131
+C    2.982217
+D    0.000000
+F    4.000000
+dtype: float64
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<h3 id="直方图">直方图</h3>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">print</span> <span class="n">s</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+      <div class="output_stream highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0    2
+1    5
+2    6
+3    6
+4    6
+5    3
+6    5
+7    0
+8    4
+9    4
+dtype: int64
+</code></pre></div>      </div>
+    </div>
+  </div>
+</div>
+
+<p>直方图信息：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span> <span class="n">s</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+      <div class="output_stream highlighter-rouge"><div class="highlight"><pre class="highlight"><code>6    3
+5    2
+4    2
+3    1
+2    1
+0    1
+dtype: int64
+</code></pre></div>      </div>
+    </div>
+  </div>
+</div>
+
+<p>绘制直方图信息：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">h</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <p class="output_png"><img src="D%3A/ZU_workplace/08_book/Python-book/Pythonbook1/_build/images/05/01_126_0.png" alt="png" /></p>
+
+    </div>
+  </div>
+</div>
+
+<h3 id="字符串方法">字符串方法</h3>
+
+<p>当 <code class="highlighter-rouge">Series</code> 或者 <code class="highlighter-rouge">DataFrame</code> 的某一列是字符串时，我们可以用 <code class="highlighter-rouge">.str</code> 对这个字符串数组进行字符串的基本操作：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s">'A'</span><span class="p">,</span> <span class="s">'B'</span><span class="p">,</span> <span class="s">'C'</span><span class="p">,</span> <span class="s">'Aaba'</span><span class="p">,</span> <span class="s">'Baca'</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="s">'CABA'</span><span class="p">,</span> <span class="s">'dog'</span><span class="p">,</span> <span class="s">'cat'</span><span class="p">])</span>
+
+<span class="k">print</span> <span class="n">s</span><span class="o">.</span><span class="nb">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+      <div class="output_stream highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0       a
+1       b
+2       c
+3    aaba
+4    baca
+5     NaN
+6    caba
+7     dog
+8     cat
+dtype: object
+</code></pre></div>      </div>
+    </div>
+  </div>
+</div>
+
+<h2 id="合并">合并</h2>
+
+<h3 id="连接">连接</h3>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">df</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-2.346373</td>
+      <td>0.105651</td>
+      <td>-0.048027</td>
+      <td>0.010637</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.682198</td>
+      <td>0.943043</td>
+      <td>0.147312</td>
+      <td>-0.657871</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.515766</td>
+      <td>-0.768286</td>
+      <td>0.361570</td>
+      <td>1.146278</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-0.607277</td>
+      <td>-0.003086</td>
+      <td>-1.499001</td>
+      <td>1.165728</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-1.226279</td>
+      <td>-0.177246</td>
+      <td>-1.379631</td>
+      <td>-0.639261</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.807364</td>
+      <td>-1.855060</td>
+      <td>0.325968</td>
+      <td>1.898831</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.438539</td>
+      <td>-0.728131</td>
+      <td>-0.009924</td>
+      <td>0.398360</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1.497457</td>
+      <td>-1.506314</td>
+      <td>-1.557624</td>
+      <td>0.869043</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.945985</td>
+      <td>-0.519435</td>
+      <td>-0.510359</td>
+      <td>-1.077751</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1.597679</td>
+      <td>-0.285955</td>
+      <td>-1.060736</td>
+      <td>0.608629</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>可以使用 <code class="highlighter-rouge">pd.concat</code> 函数将多个 <code class="highlighter-rouge">pandas</code> 对象进行连接：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pieces</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">5</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="mi">7</span><span class="p">:]]</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">pieces</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-2.346373</td>
+      <td>0.105651</td>
+      <td>-0.048027</td>
+      <td>0.010637</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.682198</td>
+      <td>0.943043</td>
+      <td>0.147312</td>
+      <td>-0.657871</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-1.226279</td>
+      <td>-0.177246</td>
+      <td>-1.379631</td>
+      <td>-0.639261</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1.497457</td>
+      <td>-1.506314</td>
+      <td>-1.557624</td>
+      <td>0.869043</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.945985</td>
+      <td>-0.519435</td>
+      <td>-0.510359</td>
+      <td>-1.077751</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>1.597679</td>
+      <td>-0.285955</td>
+      <td>-1.060736</td>
+      <td>0.608629</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<h3 id="数据库中的-join">数据库中的 Join</h3>
+
+<p><code class="highlighter-rouge">merge</code> 可以实现数据库中的 <code class="highlighter-rouge">join</code> 操作：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">left</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'key'</span><span class="p">:</span> <span class="p">[</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">],</span> <span class="s">'lval'</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]})</span>
+<span class="n">right</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'key'</span><span class="p">:</span> <span class="p">[</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">],</span> <span class="s">'rval'</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]})</span>
+
+<span class="k">print</span> <span class="n">left</span>
+<span class="k">print</span> <span class="n">right</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+      <div class="output_stream highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   key  lval
+0  foo     1
+1  foo     2
+   key  rval
+0  foo     4
+1  foo     5
+</code></pre></div>      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s">'key'</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key</th>
+      <th>lval</th>
+      <th>rval</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>foo</td>
+      <td>1</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>foo</td>
+      <td>1</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>foo</td>
+      <td>2</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>foo</td>
+      <td>2</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<h3 id="append">append</h3>
+
+<p>向 <code class="highlighter-rouge">DataFrame</code> 中添加行：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'A'</span><span class="p">,</span><span class="s">'B'</span><span class="p">,</span><span class="s">'C'</span><span class="p">,</span><span class="s">'D'</span><span class="p">])</span>
+
+<span class="n">df</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.587778</td>
+      <td>-0.110297</td>
+      <td>0.602245</td>
+      <td>1.212597</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.551109</td>
+      <td>0.337387</td>
+      <td>-0.220919</td>
+      <td>0.363332</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.207373</td>
+      <td>-0.128394</td>
+      <td>0.619937</td>
+      <td>-0.612694</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-0.978282</td>
+      <td>-1.038170</td>
+      <td>0.048995</td>
+      <td>-0.788973</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.843893</td>
+      <td>-1.079021</td>
+      <td>0.092212</td>
+      <td>0.485422</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>-0.056594</td>
+      <td>1.831206</td>
+      <td>1.910864</td>
+      <td>-1.331739</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>-0.487106</td>
+      <td>-1.495367</td>
+      <td>0.853440</td>
+      <td>0.410854</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1.830852</td>
+      <td>-0.014893</td>
+      <td>0.254025</td>
+      <td>0.197422</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>将第三行的值添加到最后：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.587778</td>
+      <td>-0.110297</td>
+      <td>0.602245</td>
+      <td>1.212597</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.551109</td>
+      <td>0.337387</td>
+      <td>-0.220919</td>
+      <td>0.363332</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.207373</td>
+      <td>-0.128394</td>
+      <td>0.619937</td>
+      <td>-0.612694</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-0.978282</td>
+      <td>-1.038170</td>
+      <td>0.048995</td>
+      <td>-0.788973</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.843893</td>
+      <td>-1.079021</td>
+      <td>0.092212</td>
+      <td>0.485422</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>-0.056594</td>
+      <td>1.831206</td>
+      <td>1.910864</td>
+      <td>-1.331739</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>-0.487106</td>
+      <td>-1.495367</td>
+      <td>0.853440</td>
+      <td>0.410854</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1.830852</td>
+      <td>-0.014893</td>
+      <td>0.254025</td>
+      <td>0.197422</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>-0.978282</td>
+      <td>-1.038170</td>
+      <td>0.048995</td>
+      <td>-0.788973</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<h3 id="grouping">Grouping</h3>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">'A'</span> <span class="p">:</span> <span class="p">[</span><span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span>
+                          <span class="s">'foo'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">],</span>
+                   <span class="s">'B'</span> <span class="p">:</span> <span class="p">[</span><span class="s">'one'</span><span class="p">,</span> <span class="s">'one'</span><span class="p">,</span> <span class="s">'two'</span><span class="p">,</span> <span class="s">'three'</span><span class="p">,</span>
+                          <span class="s">'two'</span><span class="p">,</span> <span class="s">'two'</span><span class="p">,</span> <span class="s">'one'</span><span class="p">,</span> <span class="s">'three'</span><span class="p">],</span>
+                   <span class="s">'C'</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
+                   <span class="s">'D'</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">)})</span>
+
+<span class="n">df</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>foo</td>
+      <td>one</td>
+      <td>0.773062</td>
+      <td>0.206503</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>bar</td>
+      <td>one</td>
+      <td>1.414609</td>
+      <td>-0.346719</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>foo</td>
+      <td>two</td>
+      <td>0.964174</td>
+      <td>0.706623</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>bar</td>
+      <td>three</td>
+      <td>0.182239</td>
+      <td>-1.516509</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>foo</td>
+      <td>two</td>
+      <td>-0.096255</td>
+      <td>0.494177</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>bar</td>
+      <td>two</td>
+      <td>-0.759471</td>
+      <td>-0.389213</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>foo</td>
+      <td>one</td>
+      <td>-0.257519</td>
+      <td>-1.411693</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>foo</td>
+      <td>three</td>
+      <td>-0.109368</td>
+      <td>0.241862</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>按照 <code class="highlighter-rouge">A</code> 的值进行分类：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">'A'</span><span class="p">)</span><span class="o">.</span><span class="nb">sum</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+    <tr>
+      <th>A</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bar</th>
+      <td>0.837377</td>
+      <td>-2.252441</td>
+    </tr>
+    <tr>
+      <th>foo</th>
+      <td>1.274094</td>
+      <td>0.237472</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>按照 <code class="highlighter-rouge">A, B</code> 的值进行分类：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">'A'</span><span class="p">,</span> <span class="s">'B'</span><span class="p">])</span><span class="o">.</span><span class="nb">sum</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+    <tr>
+      <th>A</th>
+      <th>B</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3" valign="top">bar</th>
+      <th>one</th>
+      <td>1.414609</td>
+      <td>-0.346719</td>
+    </tr>
+    <tr>
+      <th>three</th>
+      <td>0.182239</td>
+      <td>-1.516509</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>-0.759471</td>
+      <td>-0.389213</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">foo</th>
+      <th>one</th>
+      <td>0.515543</td>
+      <td>-1.205191</td>
+    </tr>
+    <tr>
+      <th>three</th>
+      <td>-0.109368</td>
+      <td>0.241862</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>0.867919</td>
+      <td>1.200800</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<h2 id="改变形状">改变形状</h2>
+
+<h3 id="stack">Stack</h3>
+
+<p>产生一个多 <code class="highlighter-rouge">index</code> 的 <code class="highlighter-rouge">DataFrame</code>：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tuples</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">[[</span><span class="s">'bar'</span><span class="p">,</span> <span class="s">'bar'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">,</span> <span class="s">'baz'</span><span class="p">,</span>
+                     <span class="s">'foo'</span><span class="p">,</span> <span class="s">'foo'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">,</span> <span class="s">'qux'</span><span class="p">],</span>
+                    <span class="p">[</span><span class="s">'one'</span><span class="p">,</span> <span class="s">'two'</span><span class="p">,</span> <span class="s">'one'</span><span class="p">,</span> <span class="s">'two'</span><span class="p">,</span>
+                     <span class="s">'one'</span><span class="p">,</span> <span class="s">'two'</span><span class="p">,</span> <span class="s">'one'</span><span class="p">,</span> <span class="s">'two'</span><span class="p">]]))</span>
+
+<span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">(</span><span class="n">tuples</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s">'first'</span><span class="p">,</span> <span class="s">'second'</span><span class="p">])</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'A'</span><span class="p">,</span> <span class="s">'B'</span><span class="p">])</span>
+
+<span class="n">df</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th>second</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">bar</th>
+      <th>one</th>
+      <td>-0.109174</td>
+      <td>0.958551</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>-0.254743</td>
+      <td>-0.975924</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">baz</th>
+      <th>one</th>
+      <td>-0.132039</td>
+      <td>-0.119009</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>0.587063</td>
+      <td>-0.819037</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">foo</th>
+      <th>one</th>
+      <td>-0.754123</td>
+      <td>0.430747</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>-0.426544</td>
+      <td>0.389822</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">qux</th>
+      <th>one</th>
+      <td>-0.382501</td>
+      <td>-0.562910</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>-0.529287</td>
+      <td>0.826337</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p><code class="highlighter-rouge">stack</code> 方法将 <code class="highlighter-rouge">columns</code> 变成一个新的 <code class="highlighter-rouge">index</code> 部分：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+
+<span class="n">stacked</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+
+<span class="n">stacked</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>first  second   
+bar    one     A   -0.109174
+               B    0.958551
+       two     A   -0.254743
+               B   -0.975924
+baz    one     A   -0.132039
+               B   -0.119009
+       two     A    0.587063
+               B   -0.819037
+dtype: float64
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<p>可以使用 <code class="highlighter-rouge">unstack()</code> 将最后一级 <code class="highlighter-rouge">index</code> 放回 <code class="highlighter-rouge">column</code>：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stacked</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th>second</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">bar</th>
+      <th>one</th>
+      <td>-0.109174</td>
+      <td>0.958551</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>-0.254743</td>
+      <td>-0.975924</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">baz</th>
+      <th>one</th>
+      <td>-0.132039</td>
+      <td>-0.119009</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>0.587063</td>
+      <td>-0.819037</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>也可以指定其他的级别：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stacked</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>second</th>
+      <th>one</th>
+      <th>two</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">bar</th>
+      <th>A</th>
+      <td>-0.109174</td>
+      <td>-0.254743</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>0.958551</td>
+      <td>-0.975924</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">baz</th>
+      <th>A</th>
+      <td>-0.132039</td>
+      <td>0.587063</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>-0.119009</td>
+      <td>-0.819037</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<h2 id="时间序列">时间序列</h2>
+
+<p>金融分析中常用到时间序列数据：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rng</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s">'3/6/2012 00:00'</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s">'D'</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rng</span><span class="p">)),</span> <span class="n">rng</span><span class="p">)</span>
+
+<span class="n">ts</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2012-03-06    1.096788
+2012-03-07    0.029678
+2012-03-08    0.511461
+2012-03-09   -0.332369
+2012-03-10    1.720321
+Freq: D, dtype: float64
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<p>标准时间表示：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ts_utc</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="s">'UTC'</span><span class="p">)</span>
+
+<span class="n">ts_utc</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2012-03-06 00:00:00+00:00    1.096788
+2012-03-07 00:00:00+00:00    0.029678
+2012-03-08 00:00:00+00:00    0.511461
+2012-03-09 00:00:00+00:00   -0.332369
+2012-03-10 00:00:00+00:00    1.720321
+Freq: D, dtype: float64
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<p>改变时区表示：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ts_utc</span><span class="o">.</span><span class="n">tz_convert</span><span class="p">(</span><span class="s">'US/Eastern'</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2012-03-05 19:00:00-05:00    1.096788
+2012-03-06 19:00:00-05:00    0.029678
+2012-03-07 19:00:00-05:00    0.511461
+2012-03-08 19:00:00-05:00   -0.332369
+2012-03-09 19:00:00-05:00    1.720321
+Freq: D, dtype: float64
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<h2 id="categoricals">Categoricals</h2>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">"id"</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="s">"raw_grade"</span><span class="p">:[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">,</span> <span class="s">'e'</span><span class="p">]})</span>
+
+<span class="n">df</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>raw_grade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>b</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>b</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>e</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>可以将 <code class="highlighter-rouge">grade</code> 变成类别：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="s">"grade"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">"raw_grade"</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">"category"</span><span class="p">)</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s">"grade"</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0    a
+1    b
+2    b
+3    a
+4    a
+5    e
+Name: grade, dtype: category
+Categories (3, object): [a, b, e]
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<p>将类别的表示转化为有意义的字符：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="s">"grade"</span><span class="p">]</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s">"very good"</span><span class="p">,</span> <span class="s">"good"</span><span class="p">,</span> <span class="s">"very bad"</span><span class="p">]</span>
+
+<span class="n">df</span><span class="p">[</span><span class="s">"grade"</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0    very good
+1         good
+2         good
+3    very good
+4    very good
+5     very bad
+Name: grade, dtype: category
+Categories (3, object): [very good, good, very bad]
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<p>添加缺失的类别：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">[</span><span class="s">"grade"</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">"grade"</span><span class="p">]</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">set_categories</span><span class="p">([</span><span class="s">"very bad"</span><span class="p">,</span> <span class="s">"bad"</span><span class="p">,</span> <span class="s">"medium"</span><span class="p">,</span> <span class="s">"good"</span><span class="p">,</span> <span class="s">"very good"</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s">"grade"</span><span class="p">]</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0    very good
+1         good
+2         good
+3    very good
+4    very good
+5     very bad
+Name: grade, dtype: category
+Categories (5, object): [very bad, bad, medium, good, very good]
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<p>使用 <code class="highlighter-rouge">grade</code> 分组：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">"grade"</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output_data_text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grade
+very bad     1
+bad          0
+medium       0
+good         2
+very good    3
+dtype: int64
+</code></pre></div>      </div>
+
+    </div>
+  </div>
+</div>
+
+<h2 id="绘图">绘图</h2>
+
+<p>使用 <code class="highlighter-rouge">ggplot</code> 风格：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s">'ggplot'</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+</div>
+
+<p><code class="highlighter-rouge">Series</code> 绘图：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s">'1/1/2000'</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">1000</span><span class="p">))</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">ts</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <p class="output_png"><img src="D%3A/ZU_workplace/08_book/Python-book/Pythonbook1/_build/images/05/01_181_0.png" alt="png" /></p>
+
+    </div>
+  </div>
+</div>
+
+<p><code class="highlighter-rouge">DataFrame</code> 按照 <code class="highlighter-rouge">columns</code> 绘图：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+                  <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'A'</span><span class="p">,</span> <span class="s">'B'</span><span class="p">,</span> <span class="s">'C'</span><span class="p">,</span> <span class="s">'D'</span><span class="p">])</span>
+
+<span class="n">df</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">"best"</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <p class="output_png"><img src="D%3A/ZU_workplace/08_book/Python-book/Pythonbook1/_build/images/05/01_183_0.png" alt="png" /></p>
+
+    </div>
+  </div>
+</div>
+
+<h2 id="文件读写">文件读写</h2>
+
+<h3 id="csv">csv</h3>
+
+<p>写入文件：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s">'foo.csv'</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+</div>
+
+<p>从文件中读取：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'foo.csv'</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unnamed: 0</th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2000-01-01</td>
+      <td>-1.011554</td>
+      <td>1.200283</td>
+      <td>-0.310949</td>
+      <td>-1.060734</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2000-01-02</td>
+      <td>-1.030894</td>
+      <td>0.660518</td>
+      <td>-0.214002</td>
+      <td>-0.422014</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2000-01-03</td>
+      <td>-0.488692</td>
+      <td>1.709209</td>
+      <td>-0.602208</td>
+      <td>1.115456</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2000-01-04</td>
+      <td>-0.440243</td>
+      <td>0.826692</td>
+      <td>0.321648</td>
+      <td>-0.351698</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2000-01-05</td>
+      <td>-0.165684</td>
+      <td>1.297303</td>
+      <td>0.817233</td>
+      <td>0.174767</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<h3 id="hdf5">hdf5</h3>
+
+<p>写入文件：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">to_hdf</span><span class="p">(</span><span class="s">"foo.h5"</span><span class="p">,</span> <span class="s">"df"</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+</div>
+
+<p>读取文件：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="o">.</span><span class="n">read_hdf</span><span class="p">(</span><span class="s">'foo.h5'</span><span class="p">,</span><span class="s">'df'</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2000-01-01</th>
+      <td>-1.011554</td>
+      <td>1.200283</td>
+      <td>-0.310949</td>
+      <td>-1.060734</td>
+    </tr>
+    <tr>
+      <th>2000-01-02</th>
+      <td>-1.030894</td>
+      <td>0.660518</td>
+      <td>-0.214002</td>
+      <td>-0.422014</td>
+    </tr>
+    <tr>
+      <th>2000-01-03</th>
+      <td>-0.488692</td>
+      <td>1.709209</td>
+      <td>-0.602208</td>
+      <td>1.115456</td>
+    </tr>
+    <tr>
+      <th>2000-01-04</th>
+      <td>-0.440243</td>
+      <td>0.826692</td>
+      <td>0.321648</td>
+      <td>-0.351698</td>
+    </tr>
+    <tr>
+      <th>2000-01-05</th>
+      <td>-0.165684</td>
+      <td>1.297303</td>
+      <td>0.817233</td>
+      <td>0.174767</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<h3 id="excel">excel</h3>
+
+<p>写入文件：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s">'foo.xlsx'</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s">'Sheet1'</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+</div>
+
+<p>读取文件：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s">'foo.xlsx'</span><span class="p">,</span> <span class="s">'Sheet1'</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s">'NA'</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>    </div>
+  </div>
+
+  <div class="output_wrapper">
+    <div class="output_subarea">
+
+      <div class="output output_html">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+      <th>D</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2000-01-01</th>
+      <td>-1.011554</td>
+      <td>1.200283</td>
+      <td>-0.310949</td>
+      <td>-1.060734</td>
+    </tr>
+    <tr>
+      <th>2000-01-02</th>
+      <td>-1.030894</td>
+      <td>0.660518</td>
+      <td>-0.214002</td>
+      <td>-0.422014</td>
+    </tr>
+    <tr>
+      <th>2000-01-03</th>
+      <td>-0.488692</td>
+      <td>1.709209</td>
+      <td>-0.602208</td>
+      <td>1.115456</td>
+    </tr>
+    <tr>
+      <th>2000-01-04</th>
+      <td>-0.440243</td>
+      <td>0.826692</td>
+      <td>0.321648</td>
+      <td>-0.351698</td>
+    </tr>
+    <tr>
+      <th>2000-01-05</th>
+      <td>-0.165684</td>
+      <td>1.297303</td>
+      <td>0.817233</td>
+      <td>0.174767</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+    </div>
+  </div>
+</div>
+
+<p>清理生成的临时文件：</p>
+
+<div class="cell code_cell">
+  <div class="input_area">
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s">"foo*"</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </div>
+
+</div>
+
+              <nav class="c-page__nav">
+  
+    
+    <a id="js-page__nav__prev" class="c-page__nav__prev" href="/05/features">
+      〈 <span class="u-margin-right-tiny"></span> 第5章 Pandas
+    </a>
+  
+
+  
+    
+    <a id="js-page__nav__next" class="c-page__nav__next" href="/05/02">
+      05-02 Series <span class="u-margin-right-tiny"></span> 〉
+    </a>
+  
+</nav>
+
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+  </body>
+</html>

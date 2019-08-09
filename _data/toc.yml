@@ -1,0 +1,377 @@
+# This file contains the order and numbering for all sections in the book.
+#
+# It is a sample TOC file to help you get started. Fill it out with entries
+# for your own content.
+#
+# Each entry has the following schema:
+#
+# - title: mytitle   # Title of chapter or section
+#   url: /myurl  # URL of section relative to the /content/ folder.
+#   sections:  # Contains a list of more entries that make up the chapter's sections
+#   not_numbered: true  # if the section shouldn't have a number in the sidebar
+#     (e.g. Introduction or appendices)
+#   expand_sections: true  # if you'd like the sections of this chapter to always
+#     be expanded in the sidebar.
+#   external: true  # Whether the URL is an external link or points to content in the book
+#
+# Below are some special values that trigger specific behavior:
+# - search: true  # Will provide a link to a search page
+# - divider: true  # Will insert a divider in the sidebar
+# - header: My Header  # Will insert a header with no link in the sidebar
+#
+# See the links below for an example.
+
+# Top-level page
+- title: 目录
+  url: /intro
+  not_numbered: true
+
+# External link
+- title: Momodel repository
+  url: http://www.momodel.cn:8899/classroom
+  external: true
+  not_numbered: true
+
+# Adds a searchbar link
+- title: 查询
+  search: true
+
+# Divider for meta-pages and content page
+- divider: true
+
+# Add a header and sample content section
+- header: 书籍内容
+
+# A chapter w/ a collection of sections beneath it
+- title: 第1章 Python 介绍
+  url: /01/features
+  not_numbered: true
+  expand_sections: true
+  sections:
+  - title: 01-1 Python 简介
+    url: /01/01
+    not_numbered: true
+    
+- title: 第2章 Python基础
+  url: /02/features
+  not_numbered: true
+  expand_sections: true
+  sections:
+  - title: 02-01 Python 入门演示
+    url: /02/01
+    not_numbered: true
+  - title: 02-02 Python 数据类型
+    url: /02/02
+    not_numbered: true
+  - title: 02-03 Python 数字
+    url: /02/03
+    not_numbered: true
+  - title: 02-04 Python 字符串
+    url: /02/04
+    not_numbered: true
+  - title: 02-05 索引和切片
+    url: /02/05
+    not_numbered: true
+  - title: 02-06 列表
+    url: /02/06
+    not_numbered: true
+  - title: 02-07 可变和不可变类型
+    url: /02/07
+    not_numbered: true
+  - title: 02-08 元组
+    url: /02/08
+    not_numbered: true
+  - title: 02-09 列表与元组的速度比较
+    url: /02/09
+    not_numbered: true
+  - title: 02-10 字典
+    url: /02/10
+    not_numbered: true
+  - title: 02-11 集合
+    url: /02/11
+    not_numbered: true
+  - title: 02-12 不可变集合
+    url: /02/12
+    not_numbered: true
+  - title: 02-13 Python 赋值机制
+    url: /02/13
+    not_numbered: true
+  - title: 02-14 判断语句
+    url: /02/14
+    not_numbered: true
+  - title: 02-15 循环
+    url: /02/15
+    not_numbered: true
+  - title: 02-16 列表推导式
+    url: /02/16
+    not_numbered: true
+  - title: 02-17 函数
+    url: /02/17
+    not_numbered: true
+  - title: 02-18 模块和包
+    url: /02/18
+    not_numbered: true
+  - title: 02-19 异常
+    url: /02/19
+    not_numbered: true
+  - title: 02-20 警告
+    url: /02/20
+    not_numbered: true
+  - title: 02-21 文件读写
+    url: /02/21
+    not_numbered: true
+    
+- title: 第3章 Python 进阶
+  url: /03/features
+  not_numbered: true
+  expand_sections: true
+  sections:
+  - title: 03-01 sys 模块简介
+    url: /03/01
+    not_numbered: true
+  - title: 03-02 与操作系统进行交互 os 模块
+    url: /03/02
+    not_numbered: true
+  - title: 03-03 CSV 文件和 csv 模块
+    url: /03/03
+    not_numbered: true
+  - title: 03-04 正则表达式和 re 模块
+    url: /03/04
+    not_numbered: true
+  - title: 03-05 datetime 模块
+    url: /03/05
+    not_numbered: true
+  - title: 03-06 SQL 数据库
+    url: /03/06
+    not_numbered: true
+  - title: 03-07 对象关系映射
+    url: /03/07
+    not_numbered: true
+  - title: 03-08 函数进阶
+    url: /03/08
+    not_numbered: true
+  - title: 03-09 迭代器
+    url: /03/09
+    not_numbered: true
+  - title: 03-10 生成器
+    url: /03/10
+    not_numbered: true
+  - title: 03-11 with 语句和上下文管理器
+    url: /03/11
+    not_numbered: true
+  - title: 03-12 装饰器
+    url: /03/12
+    not_numbered: true
+  - title: 03-13 装饰器的使用
+    url: /03/13
+    not_numbered: true
+  - title: 03-14 Python 常用模块
+    url: /03/14
+    not_numbered: true
+  - title: 03-15 作用域
+    url: /03/15 
+    not_numbered: true
+  - title: 03-16 动态编译
+    url: /03/16 
+    not_numbered: true
+    
+    
+- title: 第4章 Numpy
+  url: /04/features
+  not_numbered: true
+  expand_sections: true
+  sections:
+  - title: 04-01 Numpy 简介
+    url: /04/01 
+    not_numbered: true
+  - title: 04-02 Matplotlib基础
+    url: /04/02
+    not_numbered: true
+  - title: 04-03 Numpy 数组及其索引
+    url: /04/03 
+    not_numbered: true
+  - title: 04-04 数组类型
+    url: /04/04 
+    not_numbered: true
+  - title: 04-05 数组方法
+    url: /04/05 
+    not_numbered: true
+  - title: 04-06 数组排序
+    url: /04/06 
+    not_numbered: true
+  - title: 04-07 数组形状
+    url: /04/07 
+    not_numbered: true
+  - title: 04-08 对角线
+    url: /04/08 
+    not_numbered: true
+  - title: 04-09 数组与字符串的转换
+    url: /04/09 
+    not_numbered: true
+  - title: 04-10 数组属性方法总结
+    url: /04/10 
+    not_numbered: true
+  - title: 04-11 生成数组的函数
+    url: /04/11 
+    not_numbered: true
+  - title: 04-12 矩阵
+    url: /04/12 
+    not_numbered: true
+  - title: 04-13 一般函数
+    url: /04/13
+    not_numbered: true
+  - title: 04-14 向量化函数
+    url: /04/14
+    not_numbered: true
+  - title: 04-15 二元运算
+    url: /04/15
+    not_numbered: true
+  - title: 04-16 ufunc 对象
+    url: /04/16 
+    not_numbered: true
+  - title: 04-17 choose 函数
+    url: /04/17 
+    not_numbered: true
+  - title: 04-18 数组广播机制
+    url: /04/18
+    not_numbered: true
+  - title: 04-19 数组读写
+    url: /04/19 
+    not_numbered: true
+  - title: 04-20 结构化数组
+    url: /04/20 
+    not_numbered: true
+  - title: 04-21 记录数组
+    url: /04/21 
+    not_numbered: true
+  - title: 04-22 内存映射
+    url: /04/22
+    not_numbered: true
+  - title: 04-23 从 Matlab 到 Numpy
+    url: /04/23
+    not_numbered: true
+    
+- title: 第5章 Pandas
+  url: /05/features
+  not_numbered: true
+  expand_sections: true
+  sections:
+  - title: 05-01 十分钟上手 Pandas
+    url: /05/01
+    not_numbered: true
+  - title: 05-02 Series
+    url: /05/02 
+    not_numbered: true
+  - title: 05-03 Dataframe
+    url: /05/03
+    not_numbered: true  
+
+- title: 第6章 Matplotlib
+  url: /06/features
+  not_numbered: true
+  expand_sections: true
+  sections:
+  - title: 06-01 Pyplot 教程
+    url: /06/01
+    not_numbered: true
+  - title: 06-02 使用 style 来配置 pyplot 风格
+    url: /06/02
+    not_numbered: true
+  - title: 06-03 处理文本（基础）
+    url: /06/03
+    not_numbered: true
+  - title: 06-04 处理文本（数学表达式）
+    url: /06/04
+    not_numbered: true
+  - title: 06-05 图像基础
+    url: /06/05
+    not_numbered: true
+  - title: 06-06 注释
+    url: /06/06
+    not_numbered: true
+  - title: 06-07 标签
+    url: /06/07
+    not_numbered: true
+  - title: 06-08 figures, subplots, axes 和 ticks 对象
+    url: /06/08
+    not_numbered: true
+  - title: 06-09 不要迷信默认设置
+    url: /06/09 
+    not_numbered: true
+  - title: 06-10 各种绘图实例
+    url: /06/10
+    not_numbered: true
+
+- title: 第7章 Scipy
+  url: /07/features
+  not_numbered: true
+  expand_sections: true
+  sections:
+  - title: 07-01 Scientific Python 简介
+    url: /07/01
+    not_numbered: true
+  - title: 07-02 插值
+    url: /07/02
+    not_numbered: true
+  - title: 07-03 统计概率方法
+    url: /07/03
+    not_numbered: true
+  - title: 07-04 曲线拟合
+    url: /07/04 
+    not_numbered: true
+  - title: 07-05 最小化函数
+    url: /07/05 
+    not_numbered: true
+  - title: 07-06 积分
+    url: /07/06 
+    not_numbered: true
+  - title: 07-07 解微分方程
+    url: /07/07
+    not_numbered: true
+  - title: 07-08 稀疏矩阵
+    url: /07/08 
+    not_numbered: true
+  - title: 07-09 线性代数
+    url: /07/09
+    not_numbered: true
+  - title: 07-10 系数矩阵的线性代数
+    url: /07/10 
+    not_numbered: true
+    
+- title: 第8章 Python 有用的库
+  url: /08/features
+  not_numbered: true
+  expand_sections: true
+  sections:
+  - title: 08-01 pprint 模块
+    url: /08/01 
+    not_numbered: true
+  - title: 08-02 pickle 和 cPickle 模块
+    url: /08/02 
+    not_numbered: true
+  - title: 08-03 json 模块
+    url: /08/03
+    not_numbered: true
+  - title: 08-04 glob 模块
+    url: /08/04
+    not_numbered: true
+  - title: 08-05 shutil 模块
+    url: /08/05
+    not_numbered: true
+  - title: 08-06 gzip, zipfile, tarfile 模块
+    url: /08/06 
+    not_numbered: true
+  - title: 08-07 logging 模块
+    url: /08/07 
+    not_numbered: true
+  - title: 08-08 string 模块
+    url: /08/08 
+    not_numbered: true
+  - title: 08-09 collections 模块
+    url: /08/09 
+    not_numbered: true
+  - title: 08-10 requests 模块
+    url: /08/10 
+    not_numbered: true
+   
+ 
