@@ -27,8 +27,8 @@
   not_numbered: true
 
 # External link
-- title: Momodel repository
-  url: http://www.momodel.cn:8899/classroom
+- title: 课程详情
+  url: https://momodel.cn/classroom/class?id=5d1f3ab81afd940ab7d298bf&type=notebook
   external: true
   not_numbered: true
 
